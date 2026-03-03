@@ -1,2 +1,2 @@
 # acdn
-TodayDB All Authoring
+© Copyright - 2026 🔅 Todaydb™ 🔅 All Rights Reserved.
