@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
             adBox.style.transform = 'translateY(20px)';
             setTimeout(() => {
                 adBox.style.display = 'none';
-                setTimeout(showAd, 30000);
+                setTimeout(showAd, 60000);
             }, 500);
         }
         closeBtn.addEventListener('click', (e) => {
