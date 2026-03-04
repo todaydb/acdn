@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const players = document.querySelectorAll('.as__mX__media__player');
+    const players = document.querySelectorAll('.as__mX__media__section');
     players.forEach(player => {
         const videoId = player.getAttribute('data-v-id');
         const cover = player.querySelector('.tdb__vp__cover');
@@ -42,4 +42,5 @@ document.addEventListener("DOMContentLoaded", function() {
         }, { threshold: 0.5 });
         observer.observe(player);
     });
+
 });
