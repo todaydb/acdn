@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const iframeContainer = player.querySelector('.tdb__m__vp__frame');
         const adBox = player.querySelector('.tdb__vp__floating__bx');
         const closeBtn = player.querySelector('.tdb__vp__floating__close');
+        const playBtn = player.querySelector('.tdb__vp__play__btn');
         if (thumbImg) {
             let dataVP = thumbImg.getAttribute('data-i-vp');
             if (dataVP && dataVP !== "") {
@@ -16,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 const ytThumb = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
                 thumbImg.src = ytThumb;
                 thumbImg.setAttribute('data-i-vp', ytThumb);
-                
                 thumbImg.onerror = () => { 
                     thumbImg.src = backupImage;
                     thumbImg.setAttribute('data-i-vp', backupImage);
@@ -26,13 +26,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 thumbImg.setAttribute('data-i-vp', backupImage);
             }
         }
-        if (cover && iframeContainer && videoId) {
-            cover.addEventListener('click', () => {
+        const playVideo = (e) => {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            if (videoId && cover && iframeContainer) {
                 cover.style.display = 'none';
                 iframeContainer.style.display = 'block';
-                iframeContainer.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe>`;
-            });
-        }
+                iframeContainer.innerHTML = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top: 0; left: 0;"></iframe>`;
+            }
+        };
+        if (cover) cover.addEventListener('click', playVideo);
+        if (playBtn) playBtn.addEventListener('click', playVideo);
         if (adBox && closeBtn) {
             let autoTimer;
             const showAd = () => {
@@ -45,7 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 closeBtn.setAttribute('title', 'Open');
                 autoTimer = setTimeout(showAd, 60000);
             };
-
             closeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 adBox.classList.contains('is-active') ? hideAd() : showAd();
